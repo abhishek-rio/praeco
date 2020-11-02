@@ -11,7 +11,7 @@
 - Interactively build alerts for your Elasticsearch data using a query builder
 - Preview results in an interactive chart
 - Test your alerts against historical data
-- Send notifications to Slack, MS Teams, Email, Telegram, Jira, Line Notify, Mattermost, Command, Gitter, SNS, Zabbix, Twilio, PagerTree or an HTTP POST endpoint
+- Send notifications to Slack, MS Teams, Email, Telegram, Jira, Line Notify, Mattermost, Command, Gitter, SNS, Zabbix, Twilio, PagerTree, Exotel, GoogleChat or an HTTP POST endpoint
 - Supports the Any, Blacklist, Whitelist, Change, Frequency, Flatline, Spike, Cardinality, New Term, and Metric Aggregation rule types
 - View logs of when your alerts check, fire and fail
 
@@ -128,6 +128,8 @@ IP address for PRAECO_ELASTICSEARCH. Here's a working example:
 ```
 elasticsearch -E network.host=_site_
 export PRAECO_ELASTICSEARCH=192.168.1.145
+mkdir -p rules rule_templates
+chmod -R 777 rules rule_templates
 docker-compose up
 ```
 
@@ -270,10 +272,11 @@ Configure the elastalert `config.yaml` with:
 
 ```
 cd ~/elastalert
-mkdir rules rule_templates
+mkdir -p rules rule_templates
 chmod -R 777 rules rule_templates
 touch rules/BaseRule.config
-pip install -r requirements-dev.txt
+pip install "setuptools>=11.3"
+python setup.py install
 cp config.yaml.example config.yaml
 vi config.yaml
 ```
